@@ -52,10 +52,22 @@ function Navbar() {
         </Box>
 
        
-
-        <Box>
-
-        </Box>
+       <Box 
+       display="flex"
+       justifyContent="space-between"
+       columnGap="20px"
+       zIndex="2">
+       <IconButton sx={{color: "black"}}>
+        <SearchOutlined/>
+       </IconButton>
+       <IconButton sx={{color: "black"}}>
+        <PersonOutline/>
+       </IconButton>
+       <IconButton sx={{color: "black"}}>
+        <SearchOutlined/>
+       </IconButton>
+       </Box>
+      
 
     
     
