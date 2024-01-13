@@ -49,9 +49,26 @@ export const theme = createTheme({
         light: shades.nutral[100]
     },
   typography:{
-    fontFamily:[ 'Inter', 'sans-serif'].join(","),
+    fontFamily:[ 'Raleway', 'Arial'].join(","),
     fontSize: 11,
+    h1:{
+        fontFamily:[ 'Raleway', 'Arial'].join(","),
+        fontSize:48,
+    },
+    h2:{
+        fontFamily:[ 'Raleway', 'Arial'].join(","),
+        fontSize:36,
+    },
+    h3:{
+        fontFamily:[ 'Raleway', 'Arial'].join(","),
+        fontSize:20,
+    },
+    h4:{
+        fontFamily:[ 'Raleway', 'Arial'].join(","),
+        fontSize:14,
+    }
   }
+
 
 })
 
