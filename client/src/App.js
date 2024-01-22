@@ -11,6 +11,7 @@ import CheckOut from "./scenes/checkout/CheckOut";
 import Confirmation from "./scenes/checkout/Confirmation";
 import Navbar from "./scenes/global/Navbar";
 import CartMenu from "./scenes/global/CartMenu";
+import MainCarousel from "./scenes/home/MainCarousel";
 
 const ScrollToTop =()=>{
   const{pathname}= useLocation();

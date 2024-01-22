@@ -20,6 +20,7 @@ function Navbar() {
     const dispatch = useDispatch()
     const cart = useSelector((state)=> state.cart.cart)
   return (
+    <div id='nav'>
     <Box
     display='flex'
     alignItems='center'
@@ -29,17 +30,19 @@ function Navbar() {
     position="fixed"
     top="0"
     left="0"
-    zIndex="1"
-    justifyContent="space-between"
-    paddingX='20px'
+    zIndex="9"
+    paddingX='30px'
     borderBottom='1px solid black'
+    backgroundColor="white"
     >
 
        <Box  
        display="flex"
-       justifyContent="space-between"
-       columnGap="15px"
-       zIndex="2">
+       alignContent="start"
+       columnGap="10px"
+       zIndex="2"
+       width="33%"
+       >
             <Box
            sx={{
             '&:hover': {
@@ -97,17 +100,30 @@ function Navbar() {
         sx={{"&:hover":{cursor: "pointer"}}}
         color={shades.primary[500]}
         minWidth={"100px"}
+        width={"33%"}
+        style={{
+          display: "block",
+          marginLeft: "auto",
+          marginRight: "auto"
+        }}
 
         >
-          <img src={slook} alt="" />
+          <img src={slook} alt="" 
+          style={{
+            display: "block",
+            marginLeft: "auto",
+            marginRight: "auto"
+          }}/>
           
         </Box>
 
        
        <Box 
        display="flex"
-       justifyContent="space-between"
-       columnGap="px"
+       justifyContent={"end"}
+       textAlign={"left"}
+       columnGap="10px"
+       width={"33%"}
        zIndex="2">
        <IconButton sx={{color: "black"}}>
         <SearchOutlined/>
@@ -143,6 +159,7 @@ function Navbar() {
     
     
     </Box>
+    </div>
   )
 }
 
