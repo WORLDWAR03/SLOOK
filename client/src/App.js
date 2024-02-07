@@ -12,7 +12,7 @@ import Confirmation from "./scenes/checkout/Confirmation";
 import Navbar from "./scenes/global/Navbar";
 import CartMenu from "./scenes/global/CartMenu";
 import MainCarousel from "./scenes/home/MainCarousel";
-
+import LoginPage from "./scenes/login/register/LoginPage";
 const ScrollToTop =()=>{
   const{pathname}= useLocation();
   useEffect(()=>{
@@ -33,6 +33,7 @@ function App() {
         <Route path="/checkout" element={""}/>
         <Route path="/checkout/success" element={<Confirmation/>}/>
         <Route path="/" element={<Home/>}/>
+        <Route path="/login" element={<LoginPage/>}/>
        
 
 

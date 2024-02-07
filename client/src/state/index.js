@@ -4,6 +4,7 @@ const initialState ={
     isCartOpen: false,
     cart:[],
     items: [],
+    
 }
 
 export const cartSlice = createSlice({
@@ -40,12 +41,24 @@ export const cartSlice = createSlice({
 
         setIsCartOpen: (state) => { 
             state.isCartOpen = !state.isCartOpen;
+        },
+        setUser:(state, action)=>{
+            state.user = action.payload
+            localStorage.setItem('user',JSON.stringify(action.payload))
         }
+
     }
 })
 
+
+
+
+
+
 export const { 
     setItems ,
+    setUser, 
+    setOpenLoader,
     addToCart,
     removeFromCart,
     decreaseCount,

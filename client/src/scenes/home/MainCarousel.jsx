@@ -4,7 +4,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import NavigateNextIcon  from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import { shades } from '../../theme';
-import { useMediaQuery, Typography, IconButton, Box } from '@mui/material';
+import { useMediaQuery, Typography, IconButton, Box, Button } from '@mui/material';
 import red from "../../assets/1.jpg"
 
 const importAll = (r) =>
@@ -49,22 +49,72 @@ const MainCarousel=()=> {
         }}
         />
         <Box
-        color="black"
-        padding="15px"
-        backgroundColor={shades.secondary[500]}
         position="absolute"
         bottom="10%"
-        left={isNonMobile ? "46%" : "40%"}
-        right={isNonMobile ? undefined : "0"}
-        width="auto"
+        width="100%"
+        height="100px"
+        alignContent={'center'}
+        alignItems={"center"}
         textAlign={"center"}
-        borderRadius={"5px"}
-        border={"1px solid black"}
-        fontSize={"18px"}
+        display="flex"
+      
         >
-          <Typography>
-          CATEGORY
-          </Typography>
+
+          <Box 
+          width="33%"
+          height="50px"
+          ></Box>
+          <Box
+           width="33%"
+           height="50px"
+
+           
+          >
+
+          <div
+                  style={{
+                    type:"button" ,
+                    height: "auto",
+                    margin:"0 auto",
+                    position:"relative",
+                    color:"black",
+                    backgroundColor:`${shades.secondary[500]}`,
+                    bottom:"10%",
+                    minWidth:"100px",
+                    maxWidth:"150px",
+                    objectFit:'contain',
+                    textAlign:"contain",
+                    borderRadius:"5px",
+                    border:"1px solid black",
+                    fontSize:"",
+
+                  }} 
+          >
+          
+            <p style={{
+              width: "auto",
+              textAlign: "center"
+
+            }}>
+            
+             CATEGORY
+            </p>
+            
+          
+         
+          </div>
+
+
+          </Box>
+
+          <Box
+                    width="33%"
+                    height="50px"
+
+          >
+
+          </Box>
+         
        
         </Box>
        
