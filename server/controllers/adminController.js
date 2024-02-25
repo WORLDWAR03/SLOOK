@@ -1,56 +1,75 @@
 const PRODUCT = require('../models/productSchema');
 
+const multer = require('multer');
+
+
 //Add a new Product  to the data base
 
 const addProduct =(req,res)=>{
     try {
-            // PRODUCT.findOne({}, {}, { sort: { id: -1 } })
-            //   .then(lastProduct => {
-            //     let id;
-            //     if (lastProduct) {
-            //       id = lastProduct.id + 1;
-            //     } else {
-            //       id = 1;
-            //     }
+
+    const fileStorage = multer.diskStorage({
+        destination: (req, file, cb) => {
+          cb(null, "./upload/images/");
+        },
+        filename: (req, file, cb) => {
+          cb(null, Date.now() + "-" + file.originalname);
+        },
+      });
+      const upload = multer({
+        storage: fileStorage,}).array("image", 10)
+       upload(req, res, (err)=>{
+         
+        PRODUCT.findOne({}, {}, { sort: { id: -1 } })
+        .then(lastProduct => {
+          let id;
+          if (lastProduct) {
+            id = lastProduct.id + 1;
+          } else {
+            id = 1;
+          }
+            const newProduct = new PRODUCT({
+                  id,
+                  name: req.query.name,
+                  category: req.query.category,
+                  subcategory: req.query.subcategory,
+                  brand: req.query.brand,
+                  color: req.query.color,
+                  gender: req.query.gender,
+                  sizes: [
+                    { size: 'XS', quantity: req.query.sizes[0].quantity },
+                    { size: 'S', quantity: req.query.sizes[1].quantity},
+                    { size: 'M', quantity: req.query.sizes[2].quantity },
+                    { size: 'L', quantity: req.query.sizes[3].quantity },
+                    { size: 'XL', quantity: req.query.sizes[4].quantity },
+                    { size: 'XXL', quantity: req.query.sizes[5].quantity },
+                    { size: 'XXXL', quantity: req.query.sizes[6].quantity}
+                  ],
+                  price: req.query.price,
+                  description: req.query.description,
+                  image: req.files.map((file) => file.filename),
+                  materials: req.query.materials,
+                  new_price: req.query.new_price
+                });
           
-            //     const newProduct = new PRODUCT({
-            //       id,
-            //       name: req.body.name,
-            //       category: req.body.category,
-            //       subcategory: req.body.subcategory,
-            //       brand: req.body.brand,
-            //       color: req.body.color,
-            //       gender: req.body.gender,
-            //       sizes: [
-            //         { size: 'XS', quantity: req.body.quantity.XS },
-            //         { size: 'S', quantity: req.body.quantity.S },
-            //         { size: 'M', quantity: req.body.quantity.M },
-            //         { size: 'L', quantity: req.body.quantity.L },
-            //         { size: 'XL', quantity: req.body.quantity.XL },
-            //         { size: 'XXL', quantity: req.body.quantity.XXL },
-            //         { size: 'XXXL', quantity: req.body.quantity.XXXL }
-            //       ],
-            //       price: req.body.price,
-            //       description: req.body.description,
-            //       image: req.body.image,
-            //       materials: req.body.materials,
-            //       new_price: req.body.new_price
-            //     });
-          
-            //     newProduct.save().then(product => {
-            //       console.log(product);
-            //       res.status(201).json({
-            //         success: true,
-            //         message: "new product added successfully"
-            //       });
-            //     }).catch(err => {
-            //       console.log(err);
-            //     });
-            //   })
-            //   .catch(err => {
-            //     console.log(err);
-            //   });
-        console.log(req.query.params)
+                newProduct.save().then(product => {
+                  console.log(product);
+                  res.status(201).json({
+                    success: true,
+                    message: "new product added successfully"
+                  });
+                }).catch(err => {
+                  console.log(err);
+                });
+              })
+              .catch(err => {
+                console.log(err);
+              });
+        console.log(req.query)
+
+       })
+
+
     } catch (error) {
         
     }

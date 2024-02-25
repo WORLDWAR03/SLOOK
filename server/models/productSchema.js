@@ -50,9 +50,9 @@ const product = mongoose.Schema({
         required: true
     },
     image: {
-        type: String,
+        type: [String],
         required: true
-      },
+},
     date:{
         type:Date,
         default:Date.now,

@@ -102,8 +102,8 @@ const checkoutSchema = yup.object().shape({
       e.preventDefault()
 
       const formData = new FormData();
-      Object.values(selectedImages).forEach(file=>{
-        formData.append("Images", file);
+      Object.values(selectedImages).forEach((file)=>{
+        formData.append("image", file);
       });
       
       AxiosInstance.post('/admin/addProduct',
