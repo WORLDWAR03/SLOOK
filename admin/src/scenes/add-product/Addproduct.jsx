@@ -47,7 +47,6 @@ const checkoutSchema = yup.object().shape({
       category: "",
       subcategory: "",
       brand: "",
-      color: "",
       gender: "",
       sizes: [
         { size: "XS", quantity: 0 },
@@ -113,15 +112,15 @@ const checkoutSchema = yup.object().shape({
           {'Content-Type': 'multipart/form-data'}
         }
       )
-      // .then((response) => {
-      //   console.log(response);
-      //   // handle successful response
-      //   // resetForm();
-      // })
-      // .catch((error) => {
-      //   console.error(error);
-      //   // handle error response
-      // });
+      .then((response) => {
+        console.log(response);
+        // handle successful response
+        // resetForm();
+      })
+      .catch((error) => {
+        console.error(error);
+        // handle error response
+      });
     };
 
   // const imageHandler = (event) => {
@@ -239,7 +238,7 @@ const checkoutSchema = yup.object().shape({
                 textTransform:
                 "uppercase" }}
               />
-              <TextField
+               {/* <TextField
                 fullWidth
                 variant="filled"
                 type="text"
@@ -251,7 +250,7 @@ const checkoutSchema = yup.object().shape({
                 error={!!touched.color && !!errors.color}
                 helperText={touched.color && errors.color}
                 sx={{ gridColumn: "span 2" }}
-              />
+              />  */}
               <TextField
                 fullWidth
                 variant="filled"
@@ -395,9 +394,6 @@ sx={{ gridColumn: "span 4" ,
      
               
 </Box>     
-
-
-
 
               <TextField
                 fullWidth

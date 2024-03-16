@@ -65,7 +65,7 @@ const UserRegistration = ({setBoxName}) => {
             <ErrorMessage name="firstName" component="div" />
             <Field name="lastName" as={TextField} label="Last Name" fullWidth margin="normal" />
             <ErrorMessage name="lastName" component="div" />
-            <Field name="birthdate" as={TextField} label="Birthdate (DD/MM/YYYY)" fullWidth margin="normal" type="date" />
+            <Field name="birthdate" as={TextField} label="" fullWidth margin="normal" type="date" />
             <ErrorMessage name="birthdate" component="div" />
             <Field name="email" as={TextField} label="Email" fullWidth margin="normal" type="email" />
             <ErrorMessage name="email" component="div" />

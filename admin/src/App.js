@@ -16,6 +16,8 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import Calendar from "./scenes/calendar/calendar";
 import Addproduct from "./scenes/add-product/Addproduct";
+import Allproducts from "./scenes/all-products/Allproucts";
+import ProductCard from "./scenes/product-card/ProductCard";
 
 
 function App() {
@@ -32,6 +34,7 @@ function App() {
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/productview/:id" element={<ProductCard/>}/>
               <Route path="/team" element={<Team />} />
               <Route path="/addProduct" element={<Addproduct/>}/>
               <Route path="/contacts" element={<Contacts />} />
@@ -43,6 +46,7 @@ function App() {
               <Route path="/faq" element={<FAQ />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/geography" element={<Geography />} />
+              <Route path="/allProduct" element={<Allproducts/>}/>
             </Routes>
           </main>
         </div>

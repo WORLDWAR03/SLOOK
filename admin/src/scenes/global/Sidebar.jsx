@@ -17,6 +17,7 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import AddIcon from '@mui/icons-material/Add';
+import StoreIcon from '@mui/icons-material/Store';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -134,6 +135,14 @@ const Sidebar = () => {
               Data
             </Typography>
             <Item
+              title="All products"
+              to="/allProduct"
+              icon={<StoreIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+            <Item
               title="Manage Team"
               to="/team"
               icon={<PeopleOutlinedIcon />}
@@ -141,13 +150,6 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
 
-            <Item
-              title="Add new product"
-              to="/addProduct"
-              icon={<AddIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
 
             <Item
               title="Contacts Information"
@@ -171,6 +173,14 @@ const Sidebar = () => {
             >
               Pages
             </Typography>
+
+            <Item
+              title="Add new product"
+              to="/addProduct"
+              icon={<AddIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
             <Item
               title="Profile Form"
               to="/form"

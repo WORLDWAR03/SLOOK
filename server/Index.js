@@ -13,10 +13,12 @@ const adminRouter=require('./routes/adminRouter')
 
 app.use(express.json());
 app.use(cors());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: false }));
 
 
 app.listen(port,(error)=>{
-    if (!error){
+        if (!error){
         console.log("server running on port"+ port);
     }
     else{

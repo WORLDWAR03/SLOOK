@@ -1,3 +1,4 @@
+const { response } = require('express');
 const PRODUCT = require('../models/productSchema');
 
 const multer = require('multer');
@@ -10,7 +11,7 @@ const addProduct =(req,res)=>{
 
     const fileStorage = multer.diskStorage({
         destination: (req, file, cb) => {
-          cb(null, "./upload/images/");
+          cb(null, "public/uploads");
         },
         filename: (req, file, cb) => {
           cb(null, Date.now() + "-" + file.originalname);
@@ -34,7 +35,6 @@ const addProduct =(req,res)=>{
                   category: req.query.category,
                   subcategory: req.query.subcategory,
                   brand: req.query.brand,
-                  color: req.query.color,
                   gender: req.query.gender,
                   sizes: [
                     { size: 'XS', quantity: req.query.sizes[0].quantity },
@@ -49,7 +49,7 @@ const addProduct =(req,res)=>{
                   description: req.query.description,
                   image: req.files.map((file) => file.filename),
                   materials: req.query.materials,
-                  new_price: req.query.new_price
+                  new_price: req.query.new_price        
                 });
           
                 newProduct.save().then(product => {
@@ -77,6 +77,28 @@ const addProduct =(req,res)=>{
     
 };
 
+const getProducts = (req,res)=>{
+  try {
+    PRODUCT.find().then((response)=>{ 
+      res.status(200).json({data:response})
+    })
+  } catch (error) {
+    
+  }
+}
+//API for view a specific product by id 
+
+const getSingleProduct =(req,res)=>{
+  try {
+    PRODUCT.findOne({_id:req.query.id}).then(resp=>{
+      console.log(resp);
+      res.status(200).json({data:resp})
+    })
+    console.log(req.query.id,"helllow")
+  } catch (error) {
+
+  }
+}
 //API for delete  a specific  product by id
 
 const remonveProduct =(req,res)=>{
@@ -99,10 +121,9 @@ const remonveProduct =(req,res)=>{
 
 
 
-
-
-
 module.exports ={
     addProduct,
-    remonveProduct
+    remonveProduct,
+    getProducts,
+    getSingleProduct
 }
