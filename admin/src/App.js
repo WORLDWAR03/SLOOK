@@ -18,6 +18,8 @@ import Calendar from "./scenes/calendar/calendar";
 import Addproduct from "./scenes/add-product/Addproduct";
 import Allproducts from "./scenes/all-products/Allproucts";
 import ProductCard from "./scenes/product-card/ProductCard";
+import Register from "./scenes/admin-entry/Register";
+import Login from "./scenes/admin-entry/Login";
 
 
 function App() {
@@ -27,13 +29,23 @@ function App() {
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
+      
         <CssBaseline />
+       
+
+        
         <div className="app">
           <Sidebar isSidebar={isSidebar} />
+          
           <main className="content">
             <Topbar setIsSidebar={setIsSidebar} />
-            <Routes>
+       
+
+        <Routes>
+   
+              
               <Route path="/" element={<Dashboard />} />
+              <Route path="/register" element={<Register/>} />  
               <Route path="/productview/:id" element={<ProductCard/>}/>
               <Route path="/team" element={<Team />} />
               <Route path="/addProduct" element={<Addproduct/>}/>
@@ -47,9 +59,12 @@ function App() {
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/geography" element={<Geography />} />
               <Route path="/allProduct" element={<Allproducts/>}/>
+
+           
             </Routes>
-          </main>
-        </div>
+            </main>
+            </div>
+         
       </ThemeProvider>
     </ColorModeContext.Provider>
   );

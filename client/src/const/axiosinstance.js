@@ -2,7 +2,6 @@ import axios from "axios";
 import { BASEURL } from "../const/baseUrl";
 
 const AxiosInstance =axios.create({
-
     baseURL: BASEURL
 })
 
@@ -12,5 +11,4 @@ const AxiosInstance =axios.create({
 //     config.headers['Access-controle-Allow-Orgin']='*'
 //     return config
 // })
-
 export default AxiosInstance;

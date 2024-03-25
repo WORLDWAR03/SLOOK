@@ -33,7 +33,6 @@ const addProduct =(req,res)=>{
                   id,
                   name: req.query.name,
                   category: req.query.category,
-                  subcategory: req.query.subcategory,
                   brand: req.query.brand,
                   gender: req.query.gender,
                   sizes: [

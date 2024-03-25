@@ -13,10 +13,7 @@ const product = mongoose.Schema({
         type: String,
         required: true
     },
-    subcategory: {
-        type: String,
-        required: true
-    },
+   
     brand: {
         type: String,
         default: "SLOOK"

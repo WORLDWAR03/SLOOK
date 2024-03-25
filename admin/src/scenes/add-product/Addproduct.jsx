@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Grid, Fab, useTheme  } from "@mui/material";
+import { Box, Button, TextField, Grid, Fab, useTheme ,Typography,Modal,Fade } from "@mui/material";
 import { Formik ,  Field, Form } from "formik";
 import { useFormikContext } from 'formik';
 import * as yup from "yup";
@@ -9,6 +9,7 @@ import { tokens } from "../../theme";
 import { useState } from "react";
 import axios from 'axios';
 import AxiosInstance from "../../config/axioxInstance";
+import { useNavigate } from "react-router-dom";
 
 const checkoutSchema = yup.object().shape({
   name: yup.string().required("required"),
@@ -37,15 +38,29 @@ const checkoutSchema = yup.object().shape({
 
 
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
   const Addproduct = ({  handleBlur, touched, errors }) => {
-    
-    
 
+    const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
+
+    
     const [values, setValues] = useState({
       name: "",
       category: "",
-      subcategory: "",
       brand: "",
       gender: "",
       sizes: [
@@ -112,10 +127,14 @@ const checkoutSchema = yup.object().shape({
           {'Content-Type': 'multipart/form-data'}
         }
       )
-      .then((response) => {
+      .then((response) => { 
         console.log(response);
-        // handle successful response
-        // resetForm();
+        if(response.message === "new product added successfully"
+        ){
+          navigate("/addProduct");
+        }if(response._message === "product validation failed"){
+          
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -199,30 +218,16 @@ const checkoutSchema = yup.object().shape({
                 variant="filled"
                 type="text"
                 label="Category"
-          
                 onChange={handleChange}
                 value={values.category}
                 name="category"
                 error={!!touched.category && !!errors.category}
                 helperText={touched.category && errors.category}
-                sx={{ gridColumn: "span 2" ,
+                sx={{ gridColumn: "span 2",
                 textTransform:
                 "capitalize"}}
               />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Subcategory"
-                onChange={handleChange}
-                value={values.subcategory}
-                name="subcategory"
-                error={!!touched.subcategory && !!errors.subcategory}
-                helperText={touched.subcategory && errors.subcategory}
-                sx={{ gridColumn: "span 2" ,
-                textTransform:
-                "capitalize"}}
-              />
+           
               <TextField
                 fullWidth
                 variant="filled"
@@ -428,13 +433,42 @@ sx={{ gridColumn: "span 4" ,
 
             </Box>
             <Box display="flex" justifyContent="end" mt="20px" mb="20px">
-              <Button type="submit" onClick={handleFormSubmit} color="secondary" variant="contained">
+              <Button type="submit" onClick={handleOpen} color="secondary" variant="contained">
                 Add product
               </Button>
             </Box>
           </form>
         )}
       </Formik>
+
+      <Button onClick={handleOpen}>Open modal</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+          
+          <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            want to upload
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            do you want to save this product.
+          </Typography>
+          <Box
+          display={"flex"}
+          justifyContent={"flex-end"}
+          >
+          <Button sx={{ bgcolor:"red",marginLeft:"2px",}}onClick={handleClose}>cancel</Button>
+          <Button sx={{ bgcolor:"green",marginLeft:"5px"}}onClick={handleFormSubmit}>save</Button>
+          </Box>
+         
+        </Box>
+         
+
+        
+        </Modal>
     </Box>
   );
 };

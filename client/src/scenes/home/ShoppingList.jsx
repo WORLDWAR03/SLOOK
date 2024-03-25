@@ -4,35 +4,64 @@ import { useDispatch, useSelector } from 'react-redux'
 import AxiosInstance from '../../const/axiosinstance';
 import { makeStyles } from '@mui/system';
 import { BASEURL } from '../../const/baseUrl';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const ProductCard = ({ product }) => {
-  // const { image, description, price } = product;
-  const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down("sm"));
+  
+  const isSmallScreen = useMediaQuery('(max-width:600px)');
+  const isNonMobile = useMediaQuery("(min-width:600px)");
+  const navigate = useNavigate()
 
 
   return (
     <Card style={{position: 'relative',
-    minHeight:"200px"
+    minHeight:"auto",
+    }}
+    sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      width: isSmallScreen ? '90%' : '30%',
+      margin: '1rem',
+      
     }}>
+    
+    
       <img
         component="img"
-        height="200px"
+        height="auto"
+        width="auto"
+        object="fit"
         src={`${BASEURL}/uploads/${product?.image[0]}`}
         alt={""}
       />
+
+      <Box
+      sx={{
+        backgroundColor:"white",
+        
+          // position: 'absolute', 
+          fontWeight:"medium",
+          textTransform:"uppercase",
+          color: 'black', 
+          top:'',
+          bottom: 10,
+          textAlign:"center",
+          marginBottom:"15px",
+          
+          // transform: 'translateX(-50%)'
+        
+      }}
+      >
+
+      <span  variant="h6" component="h3"  >
+      {product.name}
+        </span>
+
+      </Box>
       
-      <div style={{
-                          position: 'absolute', 
-                          color: 'black', 
-                          top:'',
-                          bottom: 10, 
-                          left: '50%', 
-                          transform: 'translateX(-50%)'
-                        }}  variant="h6" component="h3" >
-      ${product.price}
-        </div>
+      
      
           
         <Typography variant="h5" component="h2">
@@ -149,7 +178,7 @@ const ShoppingList = () => {
       <Grid
 
       sx={{
-        justifyContent:"center",
+        justifyContent:"space-evenly",
       }}
       container 
       
@@ -158,9 +187,9 @@ const ShoppingList = () => {
       >
 
 {item?.map((item,index)=>(
-  <Grid item minWidth="250px" marginY="1px" xs={2} sm={4} md={4}>
+ 
         <ProductCard product={item} key={index}/>
-        </Grid>
+        
       ))}
 
       </Grid>
@@ -174,7 +203,7 @@ const ShoppingList = () => {
 <Box
 sx={{
   // "& > *": {
-    justifyContent:"center",
+    justifyContent:"space-evenly",
     display:'flex',
   // },
   margin:"10px"

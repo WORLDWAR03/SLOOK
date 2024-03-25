@@ -24,7 +24,7 @@ const ProductCard = ({ product }) => {
   >
     <img
       component="img"
-      height={isSmallScreen ? 150 : 200}
+      height="auto"
       src={`${BASEURL}/uploads/${product?.image[0]}`}
       alt={product.name}
     />

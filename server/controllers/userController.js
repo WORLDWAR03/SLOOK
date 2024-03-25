@@ -19,6 +19,7 @@ try {
   }
 }
 
+
 module.exports={
     getProducts
 }

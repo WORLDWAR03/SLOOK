@@ -1,10 +1,13 @@
 
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { createTheme } from '@mui/material/styles';
-import { TextField, Checkbox, Button, Container, Typography, Link } from '@mui/material';
+import { TextField, Checkbox, Button, Container, Typography, Link, Box } from '@mui/material';
 import { shades } from '../theme';
+import PhoneInput from "react-phone-input-2";
+
+import AxiosInstance from '../const/axiosinstance';
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required('First Name is required'),
@@ -12,7 +15,11 @@ const validationSchema = Yup.object().shape({
   birthdate: Yup.date().required('Birthdate is required'),
   email: Yup.string().email('Invalid email').required('Email is required'),
   password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
-  country: Yup.string().required('Country/Region is required'),
+  passwordConfirmation: Yup.string()
+     .oneOf([Yup.ref('password'), null], 'Passwords must match'),
+  phone: Yup.string().required('Phone number required'),
+  agreeToTerms: Yup.boolean().required('You must agree to the terms and conditions')
+
 });
 
 
@@ -27,16 +34,53 @@ const theme = createTheme({
   },
 });
 
+const phoneInput = forwardRef((props, ref) => {
+
+  return (
+    <Field
+      inputRef={ref}
+      fullWidth
+      label="Phone Number"
+      variant="outlined"
+      name="phone"
+      onChange={""}
+      
+    />
+    );
+  });
+
+
 
 
 
 const UserRegistration = ({setBoxName}) => {
 
   const handleSubmit = (values, { setSubmitting }) => {
-    // Handle form submission here
+    try {
+      console.log(values);
+      AxiosInstance.post('/auth/userRegister',values)
+      .then((res)=>{
+        console.log(res);
+        // setSubmitting(false);
+        if (res.data.signup){
+          setBoxName('login')
+         }else{
+          alert('signup failed')
+         };   
+      })
+        // Handle form submission here
     console.log(values);
-    setSubmitting(false);
+   
+    
+      
+    } catch (error) {
+      
+    }
+  
   };
+
+  
+  
 
   return (
 
@@ -53,8 +97,8 @@ const UserRegistration = ({setBoxName}) => {
           birthdate: '',
           email: '',
           password: '',
-          country: '',
-          agreeToTerms: false,
+          phone: '',
+          agreeToTerms: true,
         }}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
@@ -71,10 +115,18 @@ const UserRegistration = ({setBoxName}) => {
             <ErrorMessage name="email" component="div" />
             <Field name="password" as={TextField} label="Password" fullWidth margin="normal" type="password" />
             <ErrorMessage name="password" component="div" />
-            <Field name="country" as={TextField} label="Country/Region of residence" fullWidth margin="normal" />
-            <ErrorMessage name="country" component="div" />
-            <Field name="agreeToTerms" as={Checkbox} label="I have read and understood the privacy policy and I agree to the Terms of use." />
+            <Field name="passwordConfirmation" as={TextField} label="passwordConfirmation" fullWidth margin="normal" type="password" />
+            <ErrorMessage name="passwordConfirmation" component="div" />
+            <Field name="phone" as={TextField} label="+91 phone" fullWidth type="number" margin="normal"/>
+            <ErrorMessage name="phone" component="div"/>
+            <Box display='flex'>
+            <Field name="agreeToTerms" margin="normal" as={Checkbox} label="I have read and understood the privacy policy and I agree to the Terms of use." />
+            <p>I have read and understood the <a>privacy policy</a>  and I agree to the Terms of use.</p>
+            </Box>
+            
             <ErrorMessage name="agreeToTerms" component="div" />
+
+
             <Button variant="contained" color={theme.dark} backgroundColor={theme.dark} fullWidth type="submit" disabled={isSubmitting}
               sx={{
                 "backgroundColor":"black",
